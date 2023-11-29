@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://springboot-db.carsvdpnndtv.ap-northeast-2.rds.amazonaws.com:3306/Store
+    username: root
+    password: akwldrk1
+
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/html/
+    suffix: .html
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+server:
+  port: 8060
+
+
