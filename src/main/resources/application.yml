@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://springboot-db.carsvdpnndtv.ap-northeast-2.rds.amazonaws.com:3306/Store
+    url: jdbc:mysql://springboot-db.carsvdpnndtv.ap-northeast-2.rds.amazonaws.com:3306/Board
     username: root
     password: akwldrk1
 
@@ -15,6 +15,7 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
+  type-aliases-package: com.example.mybatisStore.user;
 
 server:
   port: 8060

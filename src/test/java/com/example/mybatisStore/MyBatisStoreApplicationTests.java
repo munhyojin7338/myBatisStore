@@ -1,4 +1,4 @@
-package com.example.mybatisstore;
+package com.example.mybatisStore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

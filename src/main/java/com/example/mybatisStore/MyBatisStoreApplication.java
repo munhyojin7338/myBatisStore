@@ -1,4 +1,4 @@
-package com.example.mybatisstore;
+package com.example.mybatisStore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
