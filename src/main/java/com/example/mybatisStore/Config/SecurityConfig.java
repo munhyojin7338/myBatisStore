@@ -12,6 +12,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception {
         // 권한에 따라 허용하는 url 설정
         // login, signup 페이지는 모두 허용, 다른 페이지는 인증된 사용자만 허용
+
         return http.build();
 
     }
