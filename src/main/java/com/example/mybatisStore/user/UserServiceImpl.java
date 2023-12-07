@@ -11,8 +11,5 @@ public class UserServiceImpl implements UserService{
     private final UserMapper userMapper;
 
 
-    @Override
-    public Optional<User> findByEmail(String userEmail) {
-        return userMapper.findByEmail(userEmail);
-    }
+
 }

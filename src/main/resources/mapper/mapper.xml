@@ -19,7 +19,7 @@
 
 
     <select id="findByEmail" resultMap="userResultMap" parameterType="String">
-        SELECT * FROM Board WHERE userEmail = #{userEmail}
+        SELECT * FROM user
     </select>
 
 </mapper>
