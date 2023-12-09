@@ -4,7 +4,7 @@
 <mapper namespace="com.example.mybatisStore.user">
 
 
-    <resultMap id="userResultMap" type="User">
+    <resultMap id="userResultMap" type="com.example.mybatisStore.user.User">
         <!-- 각 필드와 컬럼을 매핑 -->
         <!-- result = property 를 사용하요 필드 column 속성을 사용하여 데이터베이스 열 -->
         <id property="id" column="id"/>
