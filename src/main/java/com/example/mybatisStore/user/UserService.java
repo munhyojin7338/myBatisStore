@@ -1,12 +1,10 @@
 package com.example.mybatisStore.user;
 
-import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.example.mybatisStore.user.jwt.TokenInfo;
 
-@Service
 public interface UserService {
+    Long getSignup(UserSignup userSignup);
 
-
-
+    TokenInfo getLogin(String email, String password);
 }

@@ -20,4 +20,9 @@ mybatis:
 server:
   port: 8060
 
+springdoc:
+  version: 2.0.2
+
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
 

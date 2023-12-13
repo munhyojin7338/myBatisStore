@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--이 부분이 어떤 네임스페이스에 속하는지 정의한다. user 객체에 속하는 네임스페이스 -->
-<mapper namespace="com.example.mybatisStore.user">
+<mapper namespace="com.example.mybatisStore.user.UserMapper">
 
 
-    <resultMap id="userResultMap" type="User">
+    <resultMap id="userResultMap" type="com.example.mybatisStore.user.User">
         <!-- 각 필드와 컬럼을 매핑 -->
         <!-- result = property 를 사용하요 필드 column 속성을 사용하여 데이터베이스 열 -->
         <id property="id" column="id"/>
@@ -16,10 +16,5 @@
         <result property="address" column="address"/>
 
     </resultMap>
-
-
-    <select id="findByEmail" resultMap="userResultMap" parameterType="String">
-        SELECT * FROM user
-    </select>
 
 </mapper>
