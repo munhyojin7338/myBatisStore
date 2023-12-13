@@ -20,4 +20,6 @@ mybatis:
 server:
   port: 8060
 
+springdoc:
+  version: 2.0.2
 

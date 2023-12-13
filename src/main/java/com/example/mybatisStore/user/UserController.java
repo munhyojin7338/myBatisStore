@@ -1,18 +1,21 @@
 package com.example.mybatisStore.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
-    @GetMapping("/home")
-    public String getHome(){
-        return "There is Home";
-    }
-
-    @GetMapping("/signup")
-    public String getSignup() {
-        return "There is signup";
+    private final UserService userService;
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@Valid UserSignup userSignup) {
+        System.out.println("4");
+        Long userId = userService.getSignup(userSignup);
+        System.out.println(userId);
+        return ResponseEntity.ok(userId);
     }
 }
