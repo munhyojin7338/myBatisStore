@@ -3,7 +3,6 @@
 <!--이 부분이 어떤 네임스페이스에 속하는지 정의한다. user 객체에 속하는 네임스페이스 -->
 <mapper namespace="com.example.mybatisStore.user.UserMapper">
 
-
     <resultMap id="userResultMap" type="com.example.mybatisStore.user.User">
         <!-- 각 필드와 컬럼을 매핑 -->
         <!-- result = property 를 사용하요 필드 column 속성을 사용하여 데이터베이스 열 -->
@@ -16,5 +15,16 @@
         <result property="address" column="address"/>
 
     </resultMap>
+
+    <insert id="insertUser" parameterType="com.example.mybatisStore.user.User">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        <!-- 컬럼 명시적으로 나열 -->
+        INSERT INTO user (id, username, email, password, phone, age, address)
+        VALUES (#{id}, #{username}, #{email}, #{password}, #{phone}, #{age}, #{address})
+    </insert>
+
+
 
 </mapper>
