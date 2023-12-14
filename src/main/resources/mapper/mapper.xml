@@ -9,7 +9,7 @@
         <!-- result = property 를 사용하요 필드 column 속성을 사용하여 데이터베이스 열 -->
         <id property="id" column="id"/>
         <result property="username" column="username"/>
-        <result property="email" column="userEmail"/>
+        <result property="email" column="email"/>
         <result property="password" column="password"/>
         <result property="phone" column="phone"/>
         <result property="age" column="age" />
