@@ -15,24 +15,15 @@
         <result property="address" column="address"/>
     </resultMap>
 
-    <!-- 추가: email 중복 검사를 위한 쿼리 -->
-    <select id="checkEmailDuplicate" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM user WHERE email = #{email}
-    </select>
-
-    <!-- 수정: insertUser 쿼리에 email 중복 검사를 추가 -->
     <insert id="insertUser" parameterType="com.example.mybatisStore.user.User">
         INSERT INTO user (username, email, password, phone, age, address)
         VALUES (#{username}, #{email}, #{password}, #{phone}, #{age}, #{address})
     </insert>
 
-
-
-
-
-
-    <select id="findById" resultMap="userResultMap">
-        SELECT * FROM user WHERE id = #{id}
+    <!-- 회원가입, 로그인 : email 중복 검사를 위한 쿼리 -->
+    <select id="checkEmailDuplicate" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user WHERE email = #{email}
     </select>
+
 
 </mapper>
