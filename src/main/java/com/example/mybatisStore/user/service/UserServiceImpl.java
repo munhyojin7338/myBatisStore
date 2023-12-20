@@ -65,6 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
     @Transactional
     public TokenInfo getLogin(String email, String password) {
         LOGGER.info("로그인 시도: {}", email);

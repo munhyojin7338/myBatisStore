@@ -17,5 +17,7 @@ public interface UserMapper {
     int deleteUser(Long id); // id에 해당하는 사용자를 데이터베이스에서 삭제
 
     @Select("SELECT COUNT(*) FROM user WHERE email = #{email}")
-    int checkEmailDuplicate(String email);
+    int checkEmailDuplicate(String email); // 회원가입, 로그인  진행 시 email 중복 검색을 위한 로직
+
+
 }

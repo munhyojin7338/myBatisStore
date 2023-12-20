@@ -19,7 +19,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/signup") // 회원가입 검증 로직  -> 이미 회원가입 된 로직인지 확인
+    @PostMapping("/signup") // 회원가입 검증 로직  -> 이미 회원가입 된 로직인지 확인(완료)
     public ResponseEntity<?> signup(@RequestBody @Valid UserSignup userSignup) {
         Long userId = userService.getSignup(userSignup);
         return ResponseEntity.ok(userId);
@@ -30,11 +30,11 @@ public class UserController {
     로그인 검증 로직 -> DB 안에 저장되어있는 정보인지 확인,
     ex) 아이디 정보가 없는 회원입니다. password가 일치하지 않습니다.
      */
-    public ResponseEntity<?> login(@Valid UserLogin userLogin
+    public ResponseEntity<?> login(@RequestBody @Valid UserLogin userLogin
             , HttpServletResponse response) {
         TokenInfo tokenInfo = userService.getLogin(userLogin.getEmail(), userLogin.getPassword());
         addTokenToCookies(response, tokenInfo);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(tokenInfo);
     }
 
     private void addTokenToCookies(HttpServletResponse response, TokenInfo tokenInfo) {
