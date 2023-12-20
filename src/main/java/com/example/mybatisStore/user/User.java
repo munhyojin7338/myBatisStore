@@ -36,16 +36,14 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", password= '" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
-                // 다른 필드들도 필요에 따라 추가
                 '}';
     }
-
 
 
 

@@ -6,7 +6,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserSignup {
@@ -30,4 +29,5 @@ public class UserSignup {
 
     // Blank 가능
     private String address;
+
 }

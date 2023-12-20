@@ -1,6 +1,7 @@
-package com.example.mybatisStore.user;
+package com.example.mybatisStore.user.service;
 
 
+import com.example.mybatisStore.user.UserSignup;
 import com.example.mybatisStore.user.jwt.TokenInfo;
 
 public interface UserService {
