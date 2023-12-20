@@ -1,5 +1,9 @@
-package com.example.mybatisStore.user;
+package com.example.mybatisStore.user.service;
 
+import com.example.mybatisStore.user.User;
+import com.example.mybatisStore.user.UserMapper;
+import com.example.mybatisStore.user.UserSignup;
+import com.example.mybatisStore.user.exception.DuplicateEmailException;
 import com.example.mybatisStore.user.jwt.JwtTokenProvider;
 import com.example.mybatisStore.user.jwt.TokenInfo;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +29,15 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public Long getSignup(UserSignup userSignup) {
         LOGGER.info("사용자 등록 시도: {}", userSignup);
+        System.out.println("UserSignup: " + userSignup);
         System.out.println("1");
         try {
+            // 추가: email 중복 검사
+            if (userMapper.checkEmailDuplicate(userSignup.getEmail()) > 0) {
+                // 이미 사용 중인 email이라면 예외를 던지거나, 다른 처리를 수행할 수 있음
+                throw new DuplicateEmailException("이미 사용 중인 이메일입니다.");
+            }
+
             User user = User.builder()
                     .username(userSignup.getUsername())
                     .email(userSignup.getEmail())
@@ -43,11 +54,16 @@ public class UserServiceImpl implements UserService {
 
             LOGGER.info("사용자 등록 성공: {}", user);
             return user.getId();
+        } catch (DuplicateEmailException e) {
+            LOGGER.warn("이미 사용 중인 이메일로의 가입 시도: {}", userSignup.getEmail());
+            // 중복된 이메일에 대한 처리를 수행 (예: 예외처리, 메시지 반환 등)
+            return null;
         } catch (Exception e) {
             LOGGER.error("사용자 등록 중 오류 발생", e);
             return null;
         }
     }
+
 
     @Transactional
     public TokenInfo getLogin(String email, String password) {
