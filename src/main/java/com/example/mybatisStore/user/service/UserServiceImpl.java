@@ -4,16 +4,21 @@ import com.example.mybatisStore.user.User;
 import com.example.mybatisStore.user.UserMapper;
 import com.example.mybatisStore.user.UserSignup;
 import com.example.mybatisStore.user.exception.DuplicateEmailException;
+import com.example.mybatisStore.user.exception.LoginErrorException;
+import com.example.mybatisStore.user.exception.PasswordErrorException;
 import com.example.mybatisStore.user.jwt.JwtTokenProvider;
 import com.example.mybatisStore.user.jwt.TokenInfo;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.security.auth.login.LoginException;
 
 @Service
 @RequiredArgsConstructor
@@ -79,7 +84,7 @@ public class UserServiceImpl implements UserService {
             return tokenInfo;
         } catch (Exception e) {
             LOGGER.error("로그인 중 오류 발생", e);
-            return null;
+            throw new LoginErrorException("로그인 중 오류 발생");
         }
     }
 }
