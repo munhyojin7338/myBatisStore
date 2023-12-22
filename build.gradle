@@ -19,13 +19,11 @@ repositories {
 dependencies {
     // 프로젝트 생성 시 설정한 dependencies
     implementation 'org.springframework.boot:spring-boot-starter-security' // spring security
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'  // spring security
-    
+
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
 
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     runtimeOnly 'com.mysql:mysql-connector-j'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

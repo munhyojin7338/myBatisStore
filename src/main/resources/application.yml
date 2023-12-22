@@ -4,6 +4,10 @@ spring:
     url: jdbc:mysql://springboot-db.carsvdpnndtv.ap-northeast-2.rds.amazonaws.com:3306/Board
     username: root
     password: akwldrk1
+  security:
+    user:
+      name: user1
+      password: 123123
 
   thymeleaf:
     cache: false
