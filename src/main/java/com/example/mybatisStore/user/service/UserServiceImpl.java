@@ -5,20 +5,16 @@ import com.example.mybatisStore.user.UserMapper;
 import com.example.mybatisStore.user.UserSignup;
 import com.example.mybatisStore.user.exception.DuplicateEmailException;
 import com.example.mybatisStore.user.exception.LoginErrorException;
-import com.example.mybatisStore.user.exception.PasswordErrorException;
 import com.example.mybatisStore.user.jwt.JwtTokenProvider;
 import com.example.mybatisStore.user.jwt.TokenInfo;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.security.auth.login.LoginException;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +35,7 @@ public class UserServiceImpl implements UserService {
         try {
             // 추가: email 중복 검사
             if (userMapper.checkEmailDuplicate(userSignup.getEmail()) > 0) {
-                // 이미 사용 중인 email이라면 예외를 던지거나, 다른 처리를 수행할 수 있음
+
                 throw new DuplicateEmailException("이미 사용 중인 이메일입니다.");
             }
 

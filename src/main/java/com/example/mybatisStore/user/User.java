@@ -1,9 +1,6 @@
 package com.example.mybatisStore.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -25,11 +22,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String username;
+    @Column
     private String email; // 로그인 할 때 ID
+    @Column
     private String password;
+    @Column
     private String phone;
+    @Column
     private String age;
+    @Column
     private String address;
 
     // 새로운 toString 메서드 추가
