@@ -33,7 +33,6 @@ antMatchers() => requestMatchers()로 수정
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(( authorizeRequests)-> authorizeRequests
-                        .requestMatchers("/public/**").permitAll()
                         .anyRequest().permitAll())
                 .formLogin(AbstractHttpConfigurer::disable)
                 .sessionManagement((sessionManagement) ->
