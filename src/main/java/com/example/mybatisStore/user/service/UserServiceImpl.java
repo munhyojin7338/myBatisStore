@@ -1,7 +1,7 @@
 package com.example.mybatisStore.user.service;
 
 import com.example.mybatisStore.user.User;
-import com.example.mybatisStore.user.UserMapper;
+import com.example.mybatisStore.user.repository.UserMapper;
 import com.example.mybatisStore.user.UserSignup;
 import com.example.mybatisStore.user.exception.DuplicateEmailException;
 import com.example.mybatisStore.user.exception.LoginErrorException;
@@ -69,18 +69,24 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public TokenInfo getLogin(String email, String password) {
-        LOGGER.info("로그인 시도: {}", email);
-
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
-
         try {
+            LOGGER.info("로그인 시도: {}", email);
+
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
+
+            // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
+            // authenticate 메서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
+            // 3. 인증 정보를 기반으로 JWT 토큰 생성
             TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
-            LOGGER.info("로그인 성공: {}", email);
+
             return tokenInfo;
+
         } catch (Exception e) {
-            LOGGER.error("로그인 중 오류 발생", e);
-            throw new LoginErrorException("로그인 중 오류 발생");
+            LOGGER.error("로그인 에러: 자격 증명에 실패하였습니다. {}", e.getMessage());
+            throw new LoginErrorException("로그인에 실패하였습니다.", e); // 적절한 예외 처리로 변경
         }
     }
+
 }
