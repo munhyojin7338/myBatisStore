@@ -1,43 +1,58 @@
 package com.example.mybatisStore.Config;
 
+import com.example.mybatisStore.user.jwt.JwtAuthenticationFilter;
+import com.example.mybatisStore.user.jwt.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig  {
 
-/*
-업데이트
-
-// before
-.csrf().disable()
-// after
-.csrf(AbstractHttpConfigurer::disable) -> : Cross-Site Request Forgery (CSRF)
-공격을 방지하기 위한 CSRF 보호를 비활성화합니다.
+    private final JwtTokenProvider jwtTokenProvider;
 
 
-authorizeRequest() => authorizeHttpRequests()로 수정
-antMatchers() => requestMatchers()로 수정
- */
+    @Bean // 패스워드 암호화를 위해 필요하여 Bean으로 선언함.
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    // 403 오류 처리를 위한 핸들러 추가
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
+
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .httpBasic().disable()
+                .cors().and()
+                .csrf().disable()
+                //세션 사용 안함
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers("/test").hasRole("ROLE_USER")
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(( authorizeRequests)-> authorizeRequests
-                        .anyRequest().permitAll())
-                .formLogin(AbstractHttpConfigurer::disable)
-                .sessionManagement((sessionManagement) ->
-                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .httpBasic(withDefaults()); // HttpSecurity
+        // 403 오류 처리를 위한 핸들러 추가
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+
         return http.build();
     }
 

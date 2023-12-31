@@ -4,10 +4,12 @@ spring:
     url: jdbc:mysql://springboot-db.carsvdpnndtv.ap-northeast-2.rds.amazonaws.com:3306/Board
     username: root
     password: akwldrk1
-  security:
-    user:
-      name: user1
-      password: 123123
+  main:
+    allow-circular-references: true
+
+springdoc:
+  swagger-ui:
+    enabled: true
 
   thymeleaf:
     cache: false
@@ -24,12 +26,5 @@ mybatis:
 server:
   port: 8060
 
-springdoc:
-  version: 2.0.2
-
 jwt:
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
-
-logging:
-  level:
-    org.springframework.security: DEBUG

@@ -1,5 +1,6 @@
-package com.example.mybatisStore.user;
+package com.example.mybatisStore.user.repository;
 
+import com.example.mybatisStore.user.User;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
