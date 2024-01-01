@@ -9,7 +9,14 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
+  security:
+    user:
+      name: master
+      password: 1234
+      roles: ADMIN
+  jpa:
+    hibernate:
+      ddl-auto: update
 mybatis:
   mapper-locations: classpath:mapper/com/example/mybatisStore/user/**/*.xml
   configuration:

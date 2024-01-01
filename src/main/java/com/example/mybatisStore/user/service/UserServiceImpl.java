@@ -10,9 +10,11 @@ import com.example.mybatisStore.user.jwt.TokenInfo;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,9 @@ public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
+
+    private final PasswordEncoder passwordEncoder;
+
 
     @Override
     @Transactional
@@ -42,7 +47,7 @@ public class UserServiceImpl implements UserService {
             User user = User.builder()
                     .username(userSignup.getUsername())
                     .email(userSignup.getEmail())
-                    .password(userSignup.getPassword())
+                    .password(passwordEncoder.encode(userSignup.getPassword())) // 패스워드 암호화
                     .phone(userSignup.getPhone())
                     .age(userSignup.getAge())
                     .address(userSignup.getAddress())
@@ -83,10 +88,16 @@ public class UserServiceImpl implements UserService {
 
             return tokenInfo;
 
+        } catch (BadCredentialsException e) {
+            LOGGER.error("로그인 에러: 비밀번호가 일치하지 않습니다. {}", e.getMessage());
+            e.printStackTrace(); // 에러 스택 트레이스를 출력해보도록 추가
+            throw new LoginErrorException("비밀번호가 일치하지 않습니다.", e);
         } catch (Exception e) {
             LOGGER.error("로그인 에러: 자격 증명에 실패하였습니다. {}", e.getMessage());
-            throw new LoginErrorException("로그인에 실패하였습니다.", e); // 적절한 예외 처리로 변경
+            e.printStackTrace(); // 에러 스택 트레이스를 출력해보도록 추가
+            throw new LoginErrorException("로그인에 실패하였습니다.", e);
         }
     }
+
 
 }

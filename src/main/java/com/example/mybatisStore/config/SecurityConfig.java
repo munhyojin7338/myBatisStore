@@ -11,7 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -27,12 +26,7 @@ public class SecurityConfig  {
         return new BCryptPasswordEncoder();
     }
 
-    // 403 오류 처리를 위한 핸들러 추가
-    @Bean
-    public AccessDeniedHandler accessDeniedHandler() {
-        return new CustomAccessDeniedHandler();
 
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -44,14 +38,12 @@ public class SecurityConfig  {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/test").hasRole("ROLE")
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/signup","/login").permitAll()
+                .antMatchers("/","/main/**").authenticated() // 이 주소로 시작되면 인증이 필요
+                .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
-        // 403 오류 처리를 위한 핸들러 추가
-        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
 
         return http.build();
     }
