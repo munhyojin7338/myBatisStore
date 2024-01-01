@@ -1,4 +1,4 @@
-package com.example.mybatisStore.Config;
+package com.example.mybatisStore.config;
 
 import com.example.mybatisStore.user.jwt.JwtAuthenticationFilter;
 import com.example.mybatisStore.user.jwt.JwtTokenProvider;
@@ -44,7 +44,7 @@ public class SecurityConfig  {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/test").hasRole("ROLE_USER")
+                .antMatchers("/test").hasRole("ROLE")
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
