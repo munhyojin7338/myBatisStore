@@ -1,4 +1,4 @@
-package com.example.mybatisStore.Config;
+package com.example.mybatisStore.config;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

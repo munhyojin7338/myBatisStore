@@ -1,4 +1,4 @@
-package com.example.mybatisStore.Config;
+package com.example.mybatisStore.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

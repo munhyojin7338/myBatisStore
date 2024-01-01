@@ -6,16 +6,9 @@ spring:
     password: akwldrk1
   main:
     allow-circular-references: true
-
-springdoc:
-  swagger-ui:
-    enabled: true
-
-  thymeleaf:
-    cache: false
-    enabled: true
-    prefix: classpath:/templates/html/
-    suffix: .html
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 mybatis:
   mapper-locations: classpath:mapper/com/example/mybatisStore/user/**/*.xml
