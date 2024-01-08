@@ -83,7 +83,16 @@ public class UserServiceImpl implements UserService {
             // authenticate 메서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
-            // 3. 인증 정보를 기반으로 JWT 토큰 생성
+            // 3. 사용자 역할 확인
+            boolean isAdmin = authentication.getAuthorities().stream()
+                    .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+
+            if (isAdmin) {
+                LOGGER.info("관리자로 로그인: {}", email);
+            }
+
+
+            // 4. 인증 정보를 기반으로 JWT 토큰 생성
             TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
 
             return tokenInfo;
