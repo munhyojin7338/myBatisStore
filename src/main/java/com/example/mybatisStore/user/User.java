@@ -1,6 +1,7 @@
 package com.example.mybatisStore.user;
 
 
+import com.example.mybatisStore.store.Store;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,10 +9,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
+/*
+ User 객체가 여러개의 상품을 등록 할 수 있으니까
+ 1:N 관계 (양방향)
+ Many To One: 다대일 (N : 1)
+ One To Many: 일대다 (1 : N)
+
+ User 객체가 여러개의 댓글을 등록 할 수 있다 (업데이트 예정)
+ */
 @Setter
 @Getter
 @Builder
@@ -38,6 +47,11 @@ public class User implements UserDetails {
     @Column
     private String address;
 
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Store> stores;
+
+
     // 새로운 toString 메서드 추가
     @Override
     public String toString() {
@@ -58,7 +72,9 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return roles.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 
     // 계정이 만료되지 않았는가?
