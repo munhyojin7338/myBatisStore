@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Getter
 @Builder
 public class Store {
@@ -24,6 +23,7 @@ public class Store {
     @Column
     private String productImage; // 상품 이미지
 
+
     @Column
     private String prices; // 가격
 
@@ -32,7 +32,14 @@ public class Store {
 
     @ManyToOne
     @JoinColumn(name = "id")
-    private User user;
+    private User user; // 판매자
+
+
+    public Store(String productName, String productImage,  String prices) {
+        this.productName = productName;
+        this.productImage = productImage;
+        this.prices = prices;
+    }
 
 
 
