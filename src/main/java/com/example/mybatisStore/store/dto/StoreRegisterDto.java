@@ -11,13 +11,16 @@ import lombok.*;
 @Builder
 public class StoreRegisterDto {
 
+    @NonNull
     private String productName; // 상품명
 
     private String productImage; // 상품 이미지
 
+    @NonNull
     private String prices; // 가격
 
-    private User user;
+    @NonNull
+    private String userId; // 판매자
 
     public Store toEntity(){
         return new Store(productName, productImage,  prices);
