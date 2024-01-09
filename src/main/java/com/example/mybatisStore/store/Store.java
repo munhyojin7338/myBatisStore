@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productId", nullable = false)
+    @Column(name = "productId", nullable = false, columnDefinition = "BIGINT default 0")
     private Long productId;
 
     @Column
@@ -32,8 +32,8 @@ public class Store {
     private LocalDateTime localDateTime = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user; // 판매자
+    @JoinColumn(name = "userId")
+    private User userId; // 판매자
 
 
     public Store(String productName, String productImage,  String prices) {
