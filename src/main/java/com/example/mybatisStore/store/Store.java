@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Store {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "productId", nullable = false)
     private Long productId;
 
@@ -27,11 +27,12 @@ public class Store {
     @Column
     private String prices; // 가격
 
+    @Builder.Default
     @Column
-    private LocalDateTime localDateTime; // 생성된 time
+    private LocalDateTime localDateTime = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private User user; // 판매자
 
 

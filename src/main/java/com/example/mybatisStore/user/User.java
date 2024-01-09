@@ -31,7 +31,6 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @Column
@@ -48,8 +47,9 @@ public class User implements UserDetails {
     private String address;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Store> stores;
+
 
 
     // 새로운 toString 메서드 추가
@@ -67,7 +67,6 @@ public class User implements UserDetails {
 
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
     private List<String> roles = new ArrayList<>();
 
     @Override
