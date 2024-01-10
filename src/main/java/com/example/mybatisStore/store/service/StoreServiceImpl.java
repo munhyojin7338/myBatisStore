@@ -25,8 +25,9 @@ public class StoreServiceImpl implements StoreService{
                 .orElseThrow(() -> new RuntimeException("User not found")); // 사용자가 존재하지 않으면 예외 처리
 
         Store store = Store.builder() // 상품 판매 등록
-                .userId(user) // user 정보 , 판매자 정보
+                .user(user) // user 정보 , 판매자 정보
                 .productName(registerDto.getProductName()) // 상품 이름
+                .productContent(registerDto.getProductContent()) // 상품 설명 및 내용
                 .productImage(registerDto.getProductImage()) // 상품 이미지
                 .prices(registerDto.getPrices()) // 상품 가격
                 .build();

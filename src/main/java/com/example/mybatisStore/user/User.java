@@ -19,33 +19,38 @@ import java.util.List;
  User 객체가 여러개의 댓글을 등록 할 수 있다 (업데이트 예정)
  */
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder // 빌더 패턴
+@NoArgsConstructor // 빈 생성자
+@AllArgsConstructor // 전체 생성자
 @Entity
 public class User implements UserDetails {
 
-    @Id
+    @Id // pk
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // auto_increment
 
-    @Column
+    @Column(nullable = false, length = 50)
     private String username;
-    @Column
+
+    @Column(nullable = false, length = 100)
     private String email; // 로그인 할 때 ID
-    @Column
+    @Column(nullable = false, length = 100)
     private String password;
-    @Column
+    @Column(nullable = false)
     private String phone;
-    @Column
+    @Column(nullable = false)
     private String age;
     @Column
     private String address;
 
+    /* DB에는 RoleType이라는게 없어서 이걸 붙여줘야함
+    Enum으로 만들면 실수를 줄일 수 있다. Enum은 주로 데이터의 도메인을 만들 때 사용한다
+    */
+    @Enumerated(EnumType.STRING)
+    private RoleType role;
 
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Store> stores;
-
 
 
     // 새로운 toString 메서드 추가
