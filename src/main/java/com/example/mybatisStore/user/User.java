@@ -34,12 +34,16 @@ public class User implements UserDetails {
 
     @Column(nullable = false, length = 100)
     private String email; // 로그인 할 때 ID
+
     @Column(nullable = false, length = 100)
     private String password;
+
     @Column(nullable = false)
     private String phone;
+
     @Column(nullable = false)
     private String age;
+
     @Column
     private String address;
 

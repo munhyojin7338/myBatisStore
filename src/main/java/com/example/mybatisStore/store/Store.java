@@ -10,14 +10,14 @@ import javax.persistence.*;
 
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor // 빈 생성자
+@AllArgsConstructor // 전체 생성자
 @Getter
-@Builder
+@Builder // 빌더패턴
 public class Store {
-    @Id
+    @Id // pk
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
+    private Long productId; // auto_increment 사용함 (MySQL)
 
     @Column(nullable = false, length = 50)
     private String productName; // 상품명
@@ -36,15 +36,12 @@ public class Store {
     @JoinColumn(name = "userId")
     private User user; // 글을 작성한 판매자 id,
 
-
-
-
-
-    public Store(String productName, String productContent,String productImage,  String prices) {
+    public Store(String productName, String productContent,String productImage,  String prices, User user) {
         this.productName = productName;
         this.productContent = productContent;
         this.productImage = productImage;
         this.prices = prices;
+        this.user = user;
     }
 
 

@@ -20,8 +20,15 @@ public class StoreServiceImpl implements StoreService{
 
     @Override
     @Transactional
-    public Long getCreate(StoreRegisterDto registerDto) {
-        User user = userRepository.findByEmail("DONE@gmail.com")
+    public Store getProductById(Long productId) {
+        return storeRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("찾을 수 없는 게시물입니다."));
+    }
+
+    @Override
+    @Transactional
+    public Long getCreate(Long userId, StoreRegisterDto registerDto) {
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found")); // 사용자가 존재하지 않으면 예외 처리
 
         Store store = Store.builder() // 상품 판매 등록
@@ -34,4 +41,5 @@ public class StoreServiceImpl implements StoreService{
         storeRepository.save(store);
         return store.getProductId();
     }
+
 }

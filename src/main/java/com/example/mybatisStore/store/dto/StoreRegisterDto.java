@@ -25,9 +25,9 @@ public class StoreRegisterDto {
     private String prices; // 가격
 
     @NonNull
-    private String userId; // 판매자
+    private User user; // 판매자
 
     public Store toEntity(){
-        return new Store(productName, productContent,productImage,  prices);
+        return new Store(productName, productContent,productImage,  prices, user);
     }
 }
