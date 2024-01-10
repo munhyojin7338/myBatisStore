@@ -1,6 +1,6 @@
 package com.example.mybatisStore.user.service;
 
-import com.example.mybatisStore.user.User;
+import com.example.mybatisStore.user.entity.User;
 import com.example.mybatisStore.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

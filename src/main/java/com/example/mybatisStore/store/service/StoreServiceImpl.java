@@ -5,7 +5,7 @@ package com.example.mybatisStore.store.service;
 import com.example.mybatisStore.store.Store;
 import com.example.mybatisStore.store.StoreRepository;
 import com.example.mybatisStore.store.dto.StoreRegisterDto;
-import com.example.mybatisStore.user.User;
+import com.example.mybatisStore.user.entity.User;
 import com.example.mybatisStore.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

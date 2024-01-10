@@ -1,6 +1,6 @@
 package com.example.mybatisStore.user.repository;
 
-import com.example.mybatisStore.user.User;
+import com.example.mybatisStore.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

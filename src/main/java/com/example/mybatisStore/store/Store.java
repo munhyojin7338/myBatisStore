@@ -1,6 +1,6 @@
 package com.example.mybatisStore.store;
 
-import com.example.mybatisStore.user.User;
+import com.example.mybatisStore.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

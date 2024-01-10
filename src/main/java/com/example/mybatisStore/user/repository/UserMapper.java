@@ -1,12 +1,12 @@
 package com.example.mybatisStore.user.repository;
 
-import com.example.mybatisStore.user.User;
+import com.example.mybatisStore.user.entity.User;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
     @Select("SELECT * FROM user WHERE id = #{id}")
-    User findById(Long id); // id에 해당하는 사용자를 검색
+    User findByUserId(Long id); // id에 해당하는 사용자를 검색
 
     @Insert("INSERT INTO user (id, username, email, password, phone, age, address) VALUES (#{id}, #{username}, #{email}, #{password}, #{phone}, #{age}, #{address})")
     int insertUser(User user); //  회원정보 데이터 삽입

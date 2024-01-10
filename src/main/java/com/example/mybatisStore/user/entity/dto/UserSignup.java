@@ -1,4 +1,4 @@
-package com.example.mybatisStore.user;
+package com.example.mybatisStore.user.entity.dto;
 
 
 import lombok.*;

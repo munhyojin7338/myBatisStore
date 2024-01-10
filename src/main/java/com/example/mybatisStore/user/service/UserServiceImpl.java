@@ -1,13 +1,14 @@
 package com.example.mybatisStore.user.service;
 
-import com.example.mybatisStore.user.User;
-import com.example.mybatisStore.user.repository.UserMapper;
-import com.example.mybatisStore.user.UserSignup;
+import com.example.mybatisStore.user.entity.User;
+import com.example.mybatisStore.user.entity.dto.UserSignup;
 import com.example.mybatisStore.user.exception.DuplicateEmailException;
 import com.example.mybatisStore.user.exception.LoginErrorException;
 import com.example.mybatisStore.user.jwt.JwtTokenProvider;
 import com.example.mybatisStore.user.jwt.TokenInfo;
+import com.example.mybatisStore.user.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,6 +18,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +32,20 @@ public class UserServiceImpl implements UserService {
     private final JwtTokenProvider jwtTokenProvider;
 
     private final PasswordEncoder passwordEncoder;
+
+    @Override
+    @Transactional
+    public User getUserById(Long id) {
+        try {
+            User user = userMapper.findByUserId(id);
+            LOGGER.info("회원 정보와 Id 값은 {} :{}", id, user);
+            return user;
+        } catch (PersistenceException e) {
+            LOGGER.error("회원 정보를 가져오는 중에 예외가 발생했습니다. ID: {}", id, e);
+            // 예외를 처리하거나 더 높은 수준으로 전파할 수 있음
+            throw new RuntimeException("회원 정보를 가져오는 중에 예외가 발생했습니다.", e);
+        }
+    }
 
 
     @Override
@@ -107,6 +124,8 @@ public class UserServiceImpl implements UserService {
             throw new LoginErrorException("로그인에 실패하였습니다.", e);
         }
     }
+
+
 
 
 }
