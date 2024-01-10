@@ -16,8 +16,6 @@ import javax.validation.Valid;
 public class StoreController {
     private final StoreService storeService;
 
-    private final StoreRepository storeRepository;
-
     @PostMapping("/Create")
     public ResponseEntity<?> createStore(@RequestBody @Valid Long userId, StoreRegisterDto storeRegisterDto) {
         Long productId = storeService.getCreate(userId, storeRegisterDto);

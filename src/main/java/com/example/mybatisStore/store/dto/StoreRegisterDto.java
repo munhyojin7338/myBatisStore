@@ -1,7 +1,7 @@
 package com.example.mybatisStore.store.dto;
 
 import com.example.mybatisStore.store.Store;
-import com.example.mybatisStore.user.User;
+import com.example.mybatisStore.user.entity.User;
 import lombok.*;
 
 import javax.persistence.Lob;

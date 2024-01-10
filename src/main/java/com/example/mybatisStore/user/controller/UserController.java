@@ -1,5 +1,7 @@
-package com.example.mybatisStore.user;
+package com.example.mybatisStore.user.controller;
 
+import com.example.mybatisStore.user.entity.dto.UserLogin;
+import com.example.mybatisStore.user.entity.dto.UserSignup;
 import com.example.mybatisStore.user.jwt.TokenInfo;
 import com.example.mybatisStore.user.service.UserService;
 
