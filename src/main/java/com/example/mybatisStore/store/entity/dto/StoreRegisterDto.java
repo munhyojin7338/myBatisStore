@@ -1,10 +1,11 @@
-package com.example.mybatisStore.store.dto;
+package com.example.mybatisStore.store.entity.dto;
 
-import com.example.mybatisStore.store.Store;
+import com.example.mybatisStore.store.entity.Store;
 import com.example.mybatisStore.user.entity.User;
 import lombok.*;
 
 import javax.persistence.Lob;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @ToString
@@ -13,7 +14,7 @@ import javax.persistence.Lob;
 @Builder
 public class StoreRegisterDto {
 
-    @NonNull
+    @NotNull
     private String productName; // 상품명
 
     @Lob // 대용량 데이터
@@ -21,10 +22,10 @@ public class StoreRegisterDto {
 
     private String productImage; // 상품 이미지
 
-    @NonNull
+    @NotNull
     private String prices; // 가격
 
-    @NonNull
+    @NotNull
     private User user; // 판매자
 
     public Store toEntity(){

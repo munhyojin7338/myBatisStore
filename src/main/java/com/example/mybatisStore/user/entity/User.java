@@ -1,7 +1,7 @@
 package com.example.mybatisStore.user.entity;
 
 
-import com.example.mybatisStore.store.Store;
+import com.example.mybatisStore.store.entity.Store;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

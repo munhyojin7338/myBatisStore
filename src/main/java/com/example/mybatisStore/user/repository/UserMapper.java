@@ -2,8 +2,10 @@ package com.example.mybatisStore.user.repository;
 
 import com.example.mybatisStore.user.entity.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface UserMapper {
     @Select("SELECT * FROM user WHERE id = #{id}")
     User findByUserId(Long id); // id에 해당하는 사용자를 검색

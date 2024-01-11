@@ -1,4 +1,4 @@
-package com.example.mybatisStore.store;
+package com.example.mybatisStore.store.entity;
 
 import com.example.mybatisStore.user.entity.User;
 import lombok.AllArgsConstructor;
