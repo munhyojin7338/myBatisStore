@@ -15,15 +15,4 @@
         <result property="address" column="address"/>
     </resultMap>
 
-    <insert id="insertUser" parameterType="com.example.mybatisStore.user.entity.User">
-        INSERT INTO user (username, email, password, phone, age, address)
-        VALUES (#{username}, #{email}, #{password}, #{phone}, #{age}, #{address})
-    </insert>
-
-    <!-- 회원가입, 로그인 : email 중복 검사를 위한 쿼리 -->
-    <select id="checkEmailDuplicate" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM user WHERE email = #{email}
-    </select>
-
-
 </mapper>

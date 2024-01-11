@@ -1,11 +1,10 @@
 package com.example.mybatisStore.store.service;
 
-import com.example.mybatisStore.store.Store;
-import com.example.mybatisStore.store.dto.StoreRegisterDto;
+import org.springframework.stereotype.Service;
 
-public interface StoreService {
+@Service
 
-    Long getCreate(Long userId, StoreRegisterDto registerDto);
+public class StoreService {
 
-    Store getProductById(Long productId);
+
 }
