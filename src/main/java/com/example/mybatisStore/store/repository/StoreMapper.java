@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StoreMapper {
 
-    void createStore(Store store);
+    void createStore(Store store); // 게시판 생성
 
 }
