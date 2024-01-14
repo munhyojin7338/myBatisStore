@@ -18,10 +18,10 @@ spring:
     hibernate:
       ddl-auto: update
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
-  type-aliases-package: com.example.mybatisStore
+  type-aliases-package: com.example.mybatisStore.resources.mapper
 
 server:
   port: 8060

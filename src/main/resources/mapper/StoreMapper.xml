@@ -11,8 +11,8 @@
     </resultMap>
 
     <!-- 게시물 등록(CREATE) -->
-    <insert id="createStore" parameterType="Store">
-        INSERT INTO store(productName, productContent, productImage, prices)
-        VALUES (#(productName), #(productContent), #(productImage), #(prices))
+    <insert id="createStore" parameterType="com.example.mybatisStore.store.entity.Store">
+        INSERT INTO store(productName, productContent, productImage, prices, userId)
+        VALUES (#{productName}, #{productContent}, #{productImage}, #{prices}, #{user.id})
     </insert>
 </mapper>
