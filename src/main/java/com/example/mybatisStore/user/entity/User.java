@@ -1,14 +1,15 @@
 package com.example.mybatisStore.user.entity;
 
 
-import com.example.mybatisStore.store.entity.Store;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 
 /*
  User 객체가 여러개의 상품을 등록 할 수 있으니까
@@ -52,10 +53,6 @@ public class User implements UserDetails {
     */
     @Enumerated(EnumType.STRING)
     private RoleType role;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Store> stores;
-
 
     // 새로운 toString 메서드 추가
     @Override
