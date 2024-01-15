@@ -1,13 +1,11 @@
 package com.example.mybatisStore.store.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor // 빈 생성자
 @AllArgsConstructor // 전체 생성자
 @Getter
+@Setter
 @Builder // 빌더패턴
 public class Store {
 

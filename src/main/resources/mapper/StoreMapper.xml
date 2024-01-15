@@ -10,4 +10,20 @@
         </selectKey>
     </insert>
 
+    <update id="updateStore" parameterType="com.example.mybatisStore.store.entity.Store">
+    <![CDATA[
+    UPDATE store
+    SET
+        product_name = #{productName},
+        product_content = #{productContent},
+        product_image = #{productImage},
+        prices = #{prices}
+    WHERE
+        product_id = #{productId}
+    ]]>
+</update>
+
+
+
 </mapper>
+
