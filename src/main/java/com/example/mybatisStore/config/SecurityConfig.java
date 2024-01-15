@@ -38,7 +38,7 @@ public class SecurityConfig  {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/signup","/login","/Create").permitAll()
+                .antMatchers("/signup","/login","/add","/update").permitAll()
                 .antMatchers("/","/main/**").authenticated() // 이 주소로 시작되면 인증이 필요
                 .antMatchers("/admin/**").hasRole("ADMIN") // 추가: /admin/** 패턴은 ADMIN 역할이 필요
                 .anyRequest().permitAll()
