@@ -1,5 +1,6 @@
 package com.example.mybatisStore.store.entity.dto;
 
+import com.example.mybatisStore.store.entity.CategoryEnum;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -15,6 +16,8 @@ public class StoreUpdateDto {
     private Long productId;
 
     private String productName;
+
+    private CategoryEnum categoryEnum;
 
     private String productContent;
 
