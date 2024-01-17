@@ -16,8 +16,8 @@ public interface StoreMapper {
     여기서는 store 테이블에 데이터를 추가하는 쿼리를 정의
     CREATE
      */
-    @Insert("INSERT INTO store (product_name, product_content, product_image, prices) " +
-            "VALUES (#{productName}, #{productContent}, #{productImage}, #{prices})")
+    @Insert("INSERT INTO store (product_name, category_enum, product_content, product_image, prices) " +
+            "VALUES (#{productName}, #{categoryEnum}, #{productContent}, #{productImage}, #{prices})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "productId", before = false, resultType = Long.class)
     void createStore(Store store);
 
@@ -30,6 +30,7 @@ public interface StoreMapper {
      */
     @Update("UPDATE store " +
             "SET product_name = #{productName}, " +
+            "category_enum = #{categoryEnum}, "  +
             "product_content = #{productContent}, " +
             "product_image = #{productImage}, " +
             "prices = #{prices} " +
