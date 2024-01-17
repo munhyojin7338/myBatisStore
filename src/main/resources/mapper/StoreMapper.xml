@@ -3,8 +3,8 @@
 <mapper namespace="com.example.mybatisStore.store.repository.StoreMapper">
 
     <insert id="insertStore" parameterType="com.example.mybatisStore.store.entity.Store">
-        INSERT INTO store (product_name, product_content, product_image, prices)
-        VALUES (#{productName}, #{productContent}, #{productImage}, #{prices})
+        INSERT INTO store (product_name, category_enum ,product_content, product_image, prices)
+        VALUES (#{productName}, #{categoryEnum},#{productContent}, #{productImage}, #{prices})
         <selectKey keyProperty="productId" resultType="java.lang.Long" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -15,6 +15,7 @@
     UPDATE store
     SET
         product_name = #{productName},
+        category_enum = #{categoryEnum},
         product_content = #{productContent},
         product_image = #{productImage},
         prices = #{prices}
