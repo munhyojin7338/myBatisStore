@@ -39,8 +39,8 @@ public class SecurityConfig  {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/signup","/login","/add","/update").permitAll()
-                .antMatchers("/","/main/**").authenticated() // 이 주소로 시작되면 인증이 필요
-                .antMatchers("/admin/**").hasRole("ADMIN") // 추가: /admin/** 패턴은 ADMIN 역할이 필요
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);

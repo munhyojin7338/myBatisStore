@@ -22,13 +22,13 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/signup") // 회원가입 검증 로직  -> 이미 회원가입 된 로직인지 확인(완료)
+    @PostMapping("/signup") // 회원가입 검증 로직  -> 이미 회원가입 된 로직인지 확인(완료), 누구나 접근 가능
     public ResponseEntity<?> signup(@RequestBody @Valid UserSignup userSignup) {
         Long userId = userService.getSignup(userSignup);
         return ResponseEntity.ok(userId);
     }
 
-    @PostMapping("/login") // 로그인
+    @PostMapping("/login") // 로그인, 누구나 접근 가능
     public ResponseEntity<?> login(@RequestBody @Valid UserLogin userLogin
             , HttpServletResponse response) {
         TokenInfo tokenInfo = userService.getLogin(userLogin.getEmail(), userLogin.getPassword());

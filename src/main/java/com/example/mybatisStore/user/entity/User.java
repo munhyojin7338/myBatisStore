@@ -64,6 +64,7 @@ public class User implements UserDetails {
                 ", phone='" + phone + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 

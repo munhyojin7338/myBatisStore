@@ -1,8 +1,12 @@
 package com.example.mybatisStore.user.entity.dto;
 
 
+import com.example.mybatisStore.user.entity.RoleType;
 import lombok.*;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -16,6 +20,7 @@ public class UserSignup {
     private String username;
 
     @NotBlank(message = "email를 입력해주세요")
+    @Email
     private String email;
 
     @NotBlank(message = "password를 입력해주세요")
@@ -31,5 +36,11 @@ public class UserSignup {
 
     // Blank 가능
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    private RoleType role;
+
+
+
 
 }
