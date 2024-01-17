@@ -12,18 +12,19 @@
 
     <update id="updateStore" parameterType="com.example.mybatisStore.store.entity.Store">
     <![CDATA[
-    UPDATE store
-    SET
-        product_name = #{productName},
-        category_enum = #{categoryEnum},
-        product_content = #{productContent},
-        product_image = #{productImage},
-        prices = #{prices}
-    WHERE
-        product_id = #{productId}
-    ]]>
-</update>
-
+        UPDATE store
+        SET product_name    = #{productName},
+            category_enum   = #{categoryEnum},
+            product_content = #{productContent},
+            product_image   = #{productImage},
+            prices          = #{prices}
+        WHERE product_id = #{productId}
+        ]]>
+    </update>
+    
+    <select id="getStoresByCategory" parameterType="com.example.mybatisStore.store.entity.Store">
+        SELECT * FROM store WHERE category_enum = #{categoryEnum}
+    </select>
 
 
 </mapper>

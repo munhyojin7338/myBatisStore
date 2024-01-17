@@ -14,7 +14,17 @@ public class Store {
     private CategoryEnum categoryEnum; // 카테고리 설정하기
     private String productContent;// 상품 설명 및 내용
     private String productImage; // 상품 이미지
-
     private String prices; // 가격
 
+    @Override
+    public String toString() {
+        return "Store {" +
+                "productName = '" + productName + '\'' +
+                ", categoryEnum = '" + categoryEnum + '\'' +
+                ", productContent = '" + productContent + '\'' +
+                ", productImage = '" + productImage + '\'' +
+                ", prices = '" + prices + '\'' +
+                '}';
+
+    }
 }

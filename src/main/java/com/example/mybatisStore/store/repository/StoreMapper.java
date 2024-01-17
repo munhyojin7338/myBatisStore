@@ -1,11 +1,11 @@
 package com.example.mybatisStore.store.repository;
 
+import com.example.mybatisStore.store.entity.CategoryEnum;
 import com.example.mybatisStore.store.entity.Store;
 import com.example.mybatisStore.store.entity.dto.StoreUpdateDto;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 
 @Mapper //  MyBatis의 Mapper 인터페이스로서 동작하도록 지정합니다.
@@ -21,9 +21,6 @@ public interface StoreMapper {
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "productId", before = false, resultType = Long.class)
     void createStore(Store store);
 
-    /*
-    READ
-     */
 
     /*
     productId가 일치하게 된다면 게시물 수정 가능, UPDATE
@@ -36,5 +33,11 @@ public interface StoreMapper {
             "prices = #{prices} " +
             "WHERE product_id = #{productId}")
     void upStore(StoreUpdateDto updateDto);
+
+    /*
+    카테고리로 게시물을 찾을 수 있게 만들기
+     */
+    @Select("SELECT * FROM store WHERE category_enum = #{categoryEnum}")
+    List<Store> findByCategory(@Param("categoryEnum")CategoryEnum categoryEnum);
 
 }
