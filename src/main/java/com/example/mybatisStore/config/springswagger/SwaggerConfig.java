@@ -1,4 +1,4 @@
-package com.example.mybatisStore.springswagger;
+package com.example.mybatisStore.config.springswagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

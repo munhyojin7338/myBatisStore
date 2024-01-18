@@ -67,6 +67,7 @@ public class UserServiceImpl implements UserService {
                     .phone(userSignup.getPhone())
                     .age(userSignup.getAge())
                     .address(userSignup.getAddress())
+                    .role(userSignup.getRole())
                     .build();
 
             LOGGER.info("생성된 사용자: {}", user);
