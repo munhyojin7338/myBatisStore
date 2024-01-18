@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- resources/mapper/UserMapper.xml -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--이 부분이 어떤 네임스페이스에 속하는지 정의한다. user 객체에 속하는 네임스페이스 -->
 <mapper namespace="com.example.mybatisStore.user.repository.UserMapper">
 
     <resultMap id="userResultMap" type="com.example.mybatisStore.user.entity.User">
@@ -14,5 +13,21 @@
         <result property="age" column="age" />
         <result property="address" column="address"/>
     </resultMap>
+
+    <!-- User 아이디로 조회하는 SQL -->
+    <select id="getUserById" resultMap="userResultMap">
+        SELECT
+            id,
+            username,
+            email,
+            password,
+            phone,
+            age,
+            address
+        FROM
+            users
+        WHERE
+            id = #{id}
+    </select>
 
 </mapper>

@@ -17,7 +17,7 @@ import java.util.Collection;
  Many To One: 다대일 (N : 1)
  One To Many: 일대다 (1 : N)
 
- User 객체가 여러개의 댓글을 등록 할 수 있다 (업데이트 예정)
+ 한명의 회원은 여러 개의 주문을 넣을 수 있다.
  */
 @Getter
 @Builder // 빌더 패턴

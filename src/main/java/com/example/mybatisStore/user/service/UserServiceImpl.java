@@ -1,6 +1,5 @@
 package com.example.mybatisStore.user.service;
 
-import com.example.mybatisStore.user.entity.RoleType;
 import com.example.mybatisStore.user.entity.User;
 import com.example.mybatisStore.user.entity.dto.UserSignup;
 import com.example.mybatisStore.user.exception.DuplicateEmailException;
