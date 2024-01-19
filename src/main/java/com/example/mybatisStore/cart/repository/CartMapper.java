@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CartMapper {
 
     @Insert("INSERT INTO carts (id) VALUES (#{id})")
-    void insertCart(Cart cart);
+    void addCart(Cart cart);
 
 }

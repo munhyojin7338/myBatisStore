@@ -1,8 +1,22 @@
+<!-- resultType 과 resultMap은 SQl 쿼리 결과를 JAVA 객체에 어떻게 매핑할지를 지정하는 데 사용됩니다.
+    resultType 결과의 유형을 간단하게 지정 , resultMap 더 복잡한 매핑 관계 및 중첩 매핑을  정의 할 수 있는더 많은 제어 제공 -->
+<!-- resultType 은 SQL 쿼리에서 나온 결과를 어떤 종류의 자바 객체로 받을 지 선택
+
+<select id="getCartById" resultType="com.example.mybatisStore.cart.entity.Cart">
+    SELECT cartId, id as id FROM carts WHERE cartId = #{cartId}
+</select>
+
+resultType="com.example.mybatisStore.cart.entity.Cart 는 쿼리 결과를 Cart 타입의 객체로 받겠다는 것
+
+resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
+-->
+
+
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mybatisStore.cart.repository.CartMapper">
 
-    <!-- Cart 아이디로 조회하는 SQL -->
+    <!-- Cart 아이디를 기반으로 Cart를 조회하는 SQL 쿼리 resultType은 결과로 받을 객체의 타입을 지정한다. -->
     <select id="getCartById" resultType="com.example.mybatisStore.cart.entity.Cart">
         SELECT
             cartId,
