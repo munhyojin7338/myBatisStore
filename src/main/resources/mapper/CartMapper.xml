@@ -9,6 +9,9 @@
 resultType="com.example.mybatisStore.cart.entity.Cart 는 쿼리 결과를 Cart 타입의 객체로 받겠다는 것
 
 resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
+
+
+USER : Cart 관의 매핑
 -->
 
 
@@ -46,7 +49,7 @@ resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
             c.cartId = #{cartId}
     </select>
 
-
+    <!-- association  1대1 (USER : CART) 매핑 유저는 장바구니를 하나만 보유 할 수 있다  -->
     <resultMap id="cartWithUser" type="com.example.mybatisStore.cart.entity.Cart">
         <id property="cartId" column="cartId"/>
         <association property="user" column="id" javaType="com.example.mybatisStore.user.entity.User" select="com.example.mybatisStore.user.repository.UserMapper.getUserById"/>

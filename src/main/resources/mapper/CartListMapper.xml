@@ -1,8 +1,57 @@
-
+    <!--
+        cartlist -> 상품페이지에서 상품 개수를 파악 할 수있는 것
+        store당 하나의 cartlist를 가지고 있을 수 있는 것
+        cart 당 하나의 cartlist를 가지고 있을 수 있는 것이다.
+    -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mybatisStore.cart.repository.CartListMapper">
 
     <!-- cartList 아아디를 기반으로 cartList를 조회하는 SQL 쿼리 resultType은 진행  -->
-
+    <select id="getCartListById" resultType="com.example.mybatisStore.cart.entity.CartList">
+        SELECT
+            cartListId,
+            id as id
+        FROM
+            cartLists
+        WHERE 
+            cartListId = #{cartListId}
+    </select>
     
+    <!-- cartList와 cart, store 정보를 함께 조회하는 SQL  -->
+    <select id="getCartListWithCartAndStore" resultMap="cartListWithCartAndStore">
+        SELECT
+            cl.cartListId,
+            cl.cart_id,
+            cl.product_id,
+            cl.count,
+            c.cart_id AS cart_cart_id,
+            s.product_id AS store_product_id,
+            s.product_name,
+            s.product_content,
+            s.product_image,
+            s.prices
+        FROM
+            CartList cl
+                INNER JOIN cart c ON cl.cart_id = c.cart_id
+                INNER JOIN store s ON cl.product_id = s.product_id
+        WHERE
+            cl.cartListId = #{cartListId}
+    </select>
+    
+    <resultMap id="cartListWithCartAndStore" type="com.example.mybatisStore.cart.entity.CartList">
+        <id property="cartListId" column="cartListId"/>
+        <result property="count" column="count"/>
+
+        <!-- 다대일(N:1) association은 다대일(N:1), 일대일(1:1) 매핑 -->
+        <association property="cart" column="cart_id"
+                     javaType="com.example.mybatisStore.cart.entity.Cart"
+                     select="com.example.mybatisStore.cart.repository.CartMapper.getCartById"/>
+
+        <!-- 다대일(N:1) association은 다대일(N:1), 일대일(1:1) 매핑 -->
+        <association property="store" column="product_id"
+                     javaType="com.example.mybatisStore.store.entity.Store"
+                     select="com.example.mybatisStore.store.repository.StoreMapper.getStoreById"/>
+    </resultMap>
+
+
 </mapper>
