@@ -1,4 +1,4 @@
-package com.example.mybatisStore.order;
+package com.example.mybatisStore.order.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,8 @@ public enum OrderStatus {
     주문을 한 상태는 Order, 주문 취소 상태는 Cancel이라고 나타냄
      */
     ORDER("주문")
-    , CANCEL("취소");
+    , CANCEL("취소")
+    , RETURNS("반품");
 
     private final String name;
 }
