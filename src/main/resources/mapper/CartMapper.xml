@@ -17,10 +17,10 @@ USER : Cart 관의 매핑
 
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mybatisStore.cart.repository.CartMapper">
+<mapper namespace="com.example.mybatisStore.order.cart.repository.CartMapper">
 
     <!-- Cart 아이디를 기반으로 Cart를 조회하는 SQL 쿼리 resultType은 결과로 받을 객체의 타입을 지정한다. -->
-    <select id="getCartById" resultType="com.example.mybatisStore.cart.entity.Cart">
+    <select id="getCartById" resultType="com.example.mybatisStore.order.cart.entity.Cart">
         SELECT
             cartId,
             id as id
@@ -50,13 +50,14 @@ USER : Cart 관의 매핑
     </select>
 
     <!-- association  1대1 (USER : CART) 매핑 유저는 장바구니를 하나만 보유 할 수 있다  -->
-    <resultMap id="cartWithUser" type="com.example.mybatisStore.cart.entity.Cart">
+    <resultMap id="cartWithUser" type="com.example.mybatisStore.order.cart.entity.Cart">
         <id property="cartId" column="cartId"/>
-        <association property="user" column="id" javaType="com.example.mybatisStore.user.entity.User" select="com.example.mybatisStore.user.repository.UserMapper.getUserById"/>
+        <association property="user" column="id" javaType="com.example.mybatisStore.order.cart.entity.Cart" select=" com.example.mybatisStore.order.cart.repository.UserMapper.getUserById"/>
     </resultMap>
 
-    <insert id="insertCart" parameterType="com.example.mybatisStore.cart.entity.Cart">
-        INSERT INTO carts (id) VALUES (#{user.id})
+    <!-- Cart(장바구니)에 Store(상품)를 추가하는 작업 -->
+    <insert id="insertCart" parameterType="com.example.mybatisStore.order.cart.entity.Cart">
+        INSERT INTO carts (id, product_id, count) VALUES (#{user.id}, #{store.productId}, #{count})
     </insert>
 
 </mapper>
