@@ -14,26 +14,26 @@ resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
 USER : Cart 관의 매핑
 -->
 
-
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mybatisStore.order.cart.repository.CartMapper">
 
     <!-- Cart 아이디를 기반으로 Cart를 조회하는 SQL 쿼리 resultType은 결과로 받을 객체의 타입을 지정한다. -->
     <select id="getCartById" resultType="com.example.mybatisStore.order.cart.entity.Cart">
         SELECT
-            cartId,
-            id as id
+            cart_id,
+            id as id, <!-- as는 별칭 -->
+            productId,
+            count
         FROM
             carts
         WHERE
-            cartId = #{cartId}
+            cart_id = #{cartId}
     </select>
 
     <!-- Cart와 User 정보를 함께 조회하는 SQL -->
     <select id="getCartWithUserById" resultMap="cartWithUser">
         SELECT
-            c.cartId,
+            c.cart_id,
             c.id as id,
             u.username,
             u.email,
@@ -46,7 +46,7 @@ USER : Cart 관의 매핑
             carts c
                 LEFT JOIN users u ON c.id = u.id
         WHERE
-            c.cartId = #{cartId}
+            c.cart_id = #{cartId}
     </select>
 
     <!-- association  1대1 (USER : CART) 매핑 유저는 장바구니를 하나만 보유 할 수 있다  -->
@@ -56,8 +56,8 @@ USER : Cart 관의 매핑
     </resultMap>
 
     <!-- Cart(장바구니)에 Store(상품)를 추가하는 작업 -->
-    <insert id="insertCart" parameterType="com.example.mybatisStore.order.cart.entity.Cart">
-        INSERT INTO carts (id, product_id, count) VALUES (#{user.id}, #{store.productId}, #{count})
+    <insert id="addToCart" parameterType="com.example.mybatisStore.order.cart.entity.Cart">
+        INSERT INTO carts (id, product_id, count) VALUES (#{id}, #{productId}, #{count})
     </insert>
 
 </mapper>

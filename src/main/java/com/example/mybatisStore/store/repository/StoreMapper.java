@@ -34,10 +34,18 @@ public interface StoreMapper {
             "WHERE product_id = #{productId}")
     void upStore(StoreUpdateDto updateDto);
 
+
     /*
-    카테고리로 게시물을 찾을 수 있게 만들기
+    카테고리로 상품을 찾을 수 있게 만들기
      */
     @Select("SELECT * FROM store WHERE category_enum = #{categoryEnum}")
     List<Store> findByCategory(@Param("categoryEnum")CategoryEnum categoryEnum);
+
+
+    /*
+        카테고리로 별로 상품을 찾고 그 중에서 낮은 가격순으로 확인해보기
+     */
+    @Select("SELECT * FROM store WHERE category_enum = #{categoryEnum} ORDER BY prices ASC")
+    List<Store> getLowerPrice(@Param("categoryEnum") CategoryEnum categoryEnum);
 
 }

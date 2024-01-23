@@ -14,9 +14,8 @@ Cart(장바구니)에는 여러개의 상품을 담을 수 있으므로 그것�
  */
 @NoArgsConstructor // 빈 생성자
 @AllArgsConstructor // 전체 생성자
-@Getter
 @Setter
-@Builder // 빌더패턴
+@Getter
 @Table(name = "carts")
 public class Cart {
     /*
@@ -27,17 +26,16 @@ public class Cart {
         장바구니 페이지에는 구매자, 상품명 , 상품 가격, 상품 개수이 담겨있다
      */
 
-
-
     private Long cartId; // auto_increment 사용함 (MySQL)
 
     private Long id; // 이 부분이 User의 Id를 참조하는 외래 키
 
     private Long productId; // 이 부분은 Store Id를 참조하는 외래 키
 
-    private String count; // 상품 개수
+    private int count; // 상품 개수
 
-    private User user; // 유저+
+    private User user; // 유저
 
     private Store store; // 상품
+
 }
