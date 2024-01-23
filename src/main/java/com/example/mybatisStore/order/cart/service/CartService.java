@@ -1,5 +1,6 @@
 package com.example.mybatisStore.order.cart.service;
 
+import com.example.mybatisStore.order.cart.entity.Cart;
 import com.example.mybatisStore.order.cart.repository.CartMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,12 @@ public class CartService {
     /*
         Cart(장바구니)에 Store(상품)를 추가하는 작업
     */
+
+    public void addToCart(Cart cart) {
+
+        cartMapper.addCart(cart
+        );
+    }
 
 
 }

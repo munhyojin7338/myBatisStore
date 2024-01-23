@@ -34,5 +34,9 @@ public class StoreService {
         return storeMapper.findByCategory(categoryEnum);
     }
 
+    public List<Store> categoryAndLowerPrice(CategoryEnum categoryEnum) {
+        return storeMapper.getLowerPrice(categoryEnum);
+    }
+
 
 }

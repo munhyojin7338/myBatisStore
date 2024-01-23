@@ -6,6 +6,8 @@ import com.example.mybatisStore.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +24,18 @@ public class StoreApiController {
     public List<Store> getStoresByCategory(@PathVariable String category) {
         CategoryEnum categoryEnum = CategoryEnum.valueOf(category.toUpperCase());
         List<Store> stores = storeService.getStoresByCategory(categoryEnum);
-        logger.info("Stores found for category {}: {}", categoryEnum, stores);
+        logger.info("카테고리 설정 완료 {}: {}", categoryEnum, stores);
         return stores;
+    }
+
+    @GetMapping("/category/{category}/lower-price")
+    public ResponseEntity<List<Store>> getStoresByCategoryAndLowerPrice(@PathVariable("category") CategoryEnum categoryEnum) {
+        try {
+            List<Store> stores = storeService.categoryAndLowerPrice(categoryEnum);
+            logger.info("카테고리 설정 후 {} 낮은 가격 순 : {}", categoryEnum, stores);
+            return new ResponseEntity<>(stores, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
