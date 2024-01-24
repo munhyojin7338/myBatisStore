@@ -20,6 +20,7 @@ public class StoreApiController {
 
     private final StoreService storeService;
     private static final Logger logger = LoggerFactory.getLogger(StoreApiController.class);
+
     @GetMapping("/findByCategory/{category}")
     public List<Store> getStoresByCategory(@PathVariable String category) {
         CategoryEnum categoryEnum = CategoryEnum.valueOf(category.toUpperCase());
@@ -33,6 +34,18 @@ public class StoreApiController {
         try {
             List<Store> stores = storeService.categoryAndLowerPrice(categoryEnum);
             logger.info("카테고리 설정 후 {} 낮은 가격 순 : {}", categoryEnum, stores);
+            return new ResponseEntity<>(stores, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @GetMapping("/category/{category}/higher-price")
+    public ResponseEntity<List<Store>> getStoresByCategoryAndHigherPrice(@PathVariable("category") CategoryEnum categoryEnum){
+        try {
+            List<Store> stores = storeService.categoryAndHigherPrice(categoryEnum);
+            logger.info("카테고리 설정 후 {} 높은 가격 순 : {}", categoryEnum, stores);
             return new ResponseEntity<>(stores, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
