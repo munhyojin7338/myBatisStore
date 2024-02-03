@@ -69,22 +69,12 @@ resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
         ORDER BY prices DESC
     </select>
 
-    <!-- 상품 구매 후 총 합계 점수 -->
-    <update id="totalProduct" parameterType="com.example.mybatisStore.store.entity.Store">
-        UPDATE store
-        SET total_rating = total_rating + #{userRating},
-            num_of_ratings = num_of_ratings + 1
-        WHERE product_id = #{productId}
-    </update>
-
-    <!-- 상품 구매 후 총 평점 평균 -->
-    <update id="rateProduct" parameterType="com.example.mybatisStore.store.entity.Store">
-        UPDATE store
-        SET total_rating = total_rating + #{userRating},
-            num_of_ratings = num_of_ratings + 1,
-            average_rating = (total_rating + #{userRating}) / (num_of_ratings + 1)
-        WHERE product_id = #{productId}
-    </update>
+    <!-- 연관 검색으로 상품 찾기 -->
+    <select id="fullTextSearch" parameterType="com.example.mybatisStore.store.entity.Store">
+        SELECT *
+        FROM store
+        WHERE MATCH(product_name) AGAINST(#{productName});
+    </select>
 
 
 
