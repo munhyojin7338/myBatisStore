@@ -2,6 +2,7 @@ package com.example.mybatisStore.store.controller;
 
 import com.example.mybatisStore.store.entity.CategoryEnum;
 import com.example.mybatisStore.store.entity.Store;
+import com.example.mybatisStore.store.repository.StoreMapper;
 import com.example.mybatisStore.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,6 +20,10 @@ import java.util.List;
 public class StoreApiController {
 
     private final StoreService storeService;
+
+    private final StoreMapper storeMapper;
+
+
     private static final Logger logger = LoggerFactory.getLogger(StoreApiController.class);
 
     @GetMapping("/findByCategory/{category}")

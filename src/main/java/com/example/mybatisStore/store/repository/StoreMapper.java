@@ -6,7 +6,6 @@ import com.example.mybatisStore.store.entity.dto.StoreUpdateDto;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-import java.util.Map;
 
 
 @Mapper //  MyBatis의 Mapper 인터페이스로서 동작하도록 지정합니다.
@@ -40,9 +39,6 @@ public interface StoreMapper {
     @Delete("DELETE FROM store WHERE product_id = #{productId}")
     void deStore(Store store);
 
-    @Select("SELECT * FROM store WHERE product_id = #{productId}")
-    void findById(Long productId);
-
     /*
     카테고리로 상품을 찾을 수 있게 만들기
      */
@@ -61,20 +57,6 @@ public interface StoreMapper {
     @Select("SELECT * FROM store WHERE category_enum = #{categoryEnum} ORDER BY prices DESC")
     List<Store> getHighPrice(@Param("categoryEnum") CategoryEnum categoryEnum);
 
-    // 상품 구매 후 평점 남기기
-    @Update("UPDATE store " +
-            "SET total_rating = total_rating + #{userRating}, " +
-            "num_of_ratings = num_of_ratings + 1 " +
-            "WHERE product_id = #{productId}")
-    void total(Map<String, Object> paramMap);
 
-
-
-    @Update("UPDATE store " +
-            "SET total_rating = total_rating + #{userRating}, " +
-            "num_of_ratings = num_of_ratings + 1, " +
-            "average_rating = (total_rating + #{userRating}) / (num_of_ratings + 1) " +
-            "WHERE product_id = #{productId}")
-    void rate(Store store);
 
 }
