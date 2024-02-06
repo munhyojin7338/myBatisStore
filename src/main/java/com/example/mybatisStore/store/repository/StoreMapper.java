@@ -6,15 +6,17 @@ import com.example.mybatisStore.store.entity.dto.StoreUpdateDto;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Mapper //  MyBatis의 Mapper 인터페이스로서 동작하도록 지정합니다.
 public interface StoreMapper {
 
+    @Select("SELECT * FROM store WHERE product_id = #{productId}")
+    Store findById(@Param("productId") Long productId);
+
     /*
-    @Insert: MyBatis에서 이 어노테이션은 데이터를 삽입하는 SQL을 지정
-    여기서는 store 테이블에 데이터를 추가하는 쿼리를 정의
-    CREATE
+    상품 생성
      */
     @Insert("INSERT INTO store (product_name, category_enum, product_content, product_image, prices) " +
             "VALUES (#{productName}, #{categoryEnum}, #{productContent}, #{productImage}, #{prices})")
@@ -26,7 +28,7 @@ public interface StoreMapper {
      */
     @Update("UPDATE store " +
             "SET product_name = #{productName}, " +
-            "category_enum = #{categoryEnum}, "  +
+            "category_enum = #{categoryEnum}, " +
             "product_content = #{productContent}, " +
             "product_image = #{productImage}, " +
             "prices = #{prices} " +
@@ -43,7 +45,7 @@ public interface StoreMapper {
     카테고리로 상품을 찾을 수 있게 만들기
      */
     @Select("SELECT * FROM store WHERE category_enum = #{categoryEnum}")
-    List<Store> findByCategory(@Param("categoryEnum")CategoryEnum categoryEnum);
+    List<Store> findByCategory(@Param("categoryEnum") CategoryEnum categoryEnum);
 
     /*
         카테고리 설정 후 낮은 가격순 확인하기
@@ -57,6 +59,17 @@ public interface StoreMapper {
     @Select("SELECT * FROM store WHERE category_enum = #{categoryEnum} ORDER BY prices DESC")
     List<Store> getHighPrice(@Param("categoryEnum") CategoryEnum categoryEnum);
 
+    /*
+        연관 검색으로 상품 찾아보기
+        utf8mb4_general_ci - > 한국어 에러 수정
+     */
+    @Select("SELECT * FROM store WHERE LOWER(product_name) LIKE CONCAT(LOWER(#{productName} COLLATE utf8mb4_general_ci), '%')")
+    List<Store> textSearch(@Param("productName") String productName);
+
+    /*
+    상품 총 점수 (5점 만점)
+     */
+    void addRating(Map<String, Object> parameters);
 
 
 }

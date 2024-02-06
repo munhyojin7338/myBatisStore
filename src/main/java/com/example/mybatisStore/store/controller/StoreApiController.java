@@ -2,7 +2,6 @@ package com.example.mybatisStore.store.controller;
 
 import com.example.mybatisStore.store.entity.CategoryEnum;
 import com.example.mybatisStore.store.entity.Store;
-import com.example.mybatisStore.store.repository.StoreMapper;
 import com.example.mybatisStore.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -21,9 +20,6 @@ public class StoreApiController {
 
     private final StoreService storeService;
 
-    private final StoreMapper storeMapper;
-
-
     private static final Logger logger = LoggerFactory.getLogger(StoreApiController.class);
 
     @GetMapping("/findByCategory/{category}")
@@ -34,6 +30,7 @@ public class StoreApiController {
         return stores;
     }
 
+    // 낮은 가격순
     @GetMapping("/category/{category}/lower-price")
     public ResponseEntity<List<Store>> getStoresByCategoryAndLowerPrice(@PathVariable("category") CategoryEnum categoryEnum) {
         try {
@@ -45,7 +42,7 @@ public class StoreApiController {
         }
     }
 
-
+    // 높은 가격순
     @GetMapping("/category/{category}/higher-price")
     public ResponseEntity<List<Store>> getStoresByCategoryAndHigherPrice(@PathVariable("category") CategoryEnum categoryEnum){
         try {
@@ -56,4 +53,17 @@ public class StoreApiController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/productName/{productName}")
+    public ResponseEntity<List<Store>> searchProductName(@PathVariable("productName") String productName) {
+        try {
+            List<Store> stores = storeService.partialTextSearch(productName);
+            logger.info("연관 된 이름 정렬 : {}", productName, stores);
+            return new ResponseEntity<>(stores, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("검색 중에 오류가 발생했습니다. 검색어: {}", productName, e);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
