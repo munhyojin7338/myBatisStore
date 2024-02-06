@@ -8,7 +8,9 @@ import com.example.mybatisStore.store.repository.StoreMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StoreService {
@@ -30,6 +32,7 @@ public class StoreService {
         storeMapper.upStore(updateDto);
     }
 
+    // 게시물 삭제
     public void deleteStore(Long productId) {
         Store store = Store.builder()
                 .productId(productId)
@@ -52,7 +55,21 @@ public class StoreService {
         return storeMapper.getHighPrice(categoryEnum);
     }
 
+    // 연관 검색으로 상품 찾아보기
+    public List<Store> partialTextSearch(String productName) {
+        return storeMapper.textSearch(productName);
+    }
 
+    // 상품 총(합) 점수
+    public void addRating(Long productId, double rating) {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("rating", rating);
+        parameters.put("productId", productId);
+        storeMapper.addRating(parameters);
 
+        // 총(합) 점수를 남기기 위한 로직
+        Store store = storeMapper.findById(productId);
+        store.addRating(rating);
+    }
 
 }
