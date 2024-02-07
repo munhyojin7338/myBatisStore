@@ -81,16 +81,13 @@ resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
         WHERE LOWER(product_name) LIKE CONCAT(LOWER(#{productName} COLLATE utf8mb4_general_ci), '%');
     </select>
 
-    <!-- 총(합) 점수, 점수를 평가한 총 User count 하기  -->
+    <!-- 총 합 점수 계산 후 평균 점수 계산하기 -->
     <update id="addRating" parameterType="map">
     <![CDATA[
         UPDATE store
-        SET total_score =
-                CASE
-                    WHEN (total_score + #{rating}) <= 5 THEN total_score + #{rating}
-                    ELSE total_score
-                    END,
-            count_user = count_user + 1
+        SET total_score = total_score + #{rating},
+            count_user = count_user + 1,
+            average_score = (total_score + #{rating}) / (count_user + 1)
         WHERE product_id = #{productId}
         ]]>
 </update>

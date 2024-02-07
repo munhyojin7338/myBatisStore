@@ -60,7 +60,7 @@ public class StoreService {
         return storeMapper.textSearch(productName);
     }
 
-    // 상품 총(합) 점수
+    // 상품 총(합) 점수 후 평균 점수까지 계산하기
     public void addRating(Long productId, double rating) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("rating", rating);
