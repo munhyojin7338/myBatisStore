@@ -12,6 +12,7 @@ import java.util.Map;
 @Mapper //  MyBatis의 Mapper 인터페이스로서 동작하도록 지정합니다.
 public interface StoreMapper {
 
+    /* 상품ID 조회 */
     @Select("SELECT * FROM store WHERE product_id = #{productId}")
     Store findById(@Param("productId") Long productId);
 

@@ -57,8 +57,17 @@ public class Store {
         if (rating >= 0 && rating <= 5) {
             totalScore += rating;
             countUser++; // 평점을 남긴 사용자 수 증가
+            calculateAverageScore(); // 평균 점수 다시 계산
         } else {
             System.out.println("유효하지 않은 평점입니다. 점수는 1.0 ~ 5.0점 가능합니다.");
+        }
+    }
+    /* 평균 점수를 구하기 위한 로직 */
+    public void calculateAverageScore() {
+        if (countUser > 0) {
+            averageScore = totalScore / countUser;
+        } else {
+            averageScore = 0; // 사용자가 아무도 점수를 남기지 않은 경우
         }
     }
 
