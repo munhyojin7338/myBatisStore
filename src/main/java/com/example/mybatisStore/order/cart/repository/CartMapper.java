@@ -4,8 +4,6 @@ import com.example.mybatisStore.order.cart.entity.Cart;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.math.BigDecimal;
-
 @Mapper
 public interface CartMapper {
 
