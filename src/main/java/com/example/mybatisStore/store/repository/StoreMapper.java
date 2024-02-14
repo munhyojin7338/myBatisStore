@@ -72,5 +72,11 @@ public interface StoreMapper {
      */
     void addRating(Map<String, Object> parameters);
 
+    @Select("SELECT * FROM store WHERE category_enum = #{categoryEnum} ORDER BY average_score DESC")
+    List<Store> getAverageHigher(@Param("categoryEnum") CategoryEnum categoryEnum);
+
+    @Select("SELECT * FROM store WHERE category_enum = #{categoryEnum} ORDER BY average_score ASC")
+    List<Store> getAverageLower(@Param("categoryEnum") CategoryEnum categoryEnum);
+
 
 }

@@ -3,20 +3,19 @@ package com.example.mybatisStore.store.entity;
 import lombok.*;
     /*
      * 구현
-        상품 생성
-        업데이트
-        상품 삭제
-        category로 게시물 찾기
-      , 낮은 가격
-      , 높은 가격순으로 상품 찾기
+      상품 생성
+      업데이트
+      상품 삭제
+      category로 게시물 찾기
+      낮은 가격
+      높은 가격순으로 상품 검색
+      낮은 가격순으로 상품 검색
       연관 된 상품 찾기 ex) iphone 검색 시 iphone 관련된 기종들이 다 검색 된다
-     장바구니 담기
-
      */
 
 /*
  * 미구현
- *   상품 구매순? , 상품 평점순
+ *   상품 구매순
  *  상품 구매, 상품 취소, 상품 반품
  *  상품 평점
  */
@@ -62,6 +61,7 @@ public class Store {
             System.out.println("유효하지 않은 평점입니다. 점수는 1.0 ~ 5.0점 가능합니다.");
         }
     }
+
     /* 평균 점수를 구하기 위한 로직 */
     public void calculateAverageScore() {
         if (countUser > 0) {

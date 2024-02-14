@@ -72,4 +72,14 @@ public class StoreService {
         store.addRating(rating);
     }
 
+    // 높은 평점부터 불러오기
+    public List<Store> averageHigher(CategoryEnum categoryEnum){
+        return storeMapper.getAverageHigher(categoryEnum);
+    }
+
+    // 낮은 평점부터 불러오기
+    public List<Store> averageLower(CategoryEnum categoryEnum) {
+        return storeMapper.getAverageLower(categoryEnum);
+    }
+
 }

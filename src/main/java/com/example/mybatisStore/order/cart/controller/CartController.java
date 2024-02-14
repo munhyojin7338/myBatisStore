@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CartController {
     private final CartService cartService;
 
+    // 장바구니 담기
     @PostMapping("/addCart")
     public ResponseEntity<?> addCart(@RequestBody Cart cart) {
         cartService.addToCart(cart);
