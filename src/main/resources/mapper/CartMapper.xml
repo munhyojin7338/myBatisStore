@@ -57,7 +57,13 @@ USER : Cart 관의 매핑
 
     <!-- Cart(장바구니)에 Store(상품)를 추가하는 작업 -->
     <insert id="addToCart" parameterType="com.example.mybatisStore.order.cart.entity.Cart">
-        INSERT INTO carts (id, product_id, count) VALUES (#{id}, #{productId}, #{count})
+        INSERT INTO carts (id, product_id, count, prices) VALUES (#{id}, #{productId}, #{count}, #{prices})
     </insert>
+
+    <!-- 상품 가격을 가져오는 메소드 -->
+    <select id="getProductPrice" resultType="java.math.BigDecimal">
+        SELECT prices FROM store
+        WHERE product_id = #{productId}
+    </select>
 
 </mapper>

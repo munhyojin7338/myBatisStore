@@ -58,7 +58,7 @@ resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
         WHERE category_enum = #{categoryEnum}
     </select>
 
-    <!-- 카테고리로 별로 상품을 찾고 그 중에서 낮은 가격순으로 확인해보기   -->
+    <!-- 카테고리로 별로 상품을 찾고 그 중에서 낮은 가격순으로 확인해보기  ORDER BY ASC -->
     <select id="categoryAndLowerPrice" parameterType="com.example.mybatisStore.store.entity.Store">
         SELECT *
         FROM store
@@ -66,7 +66,7 @@ resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
         ORDER BY prices ASC
     </select>
 
-    <!-- 카레고리 별 상품 가격 높은 순으로 확인하기 -->
+    <!-- 카레고리 별 상품 가격 높은 순으로 확인하기 ORDER BY DESC-->
     <select id="categoryAndHighPrice" parameterType="com.example.mybatisStore.store.entity.Store">
         SELECT *
         FROM store
@@ -74,7 +74,11 @@ resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
         ORDER BY prices DESC
     </select>
 
-    <!-- 연관 검색으로 상품 찾기 -->
+    <!--
+        연관 검색으로 상품 찾기
+        LOWER 문자열을 소문자로 변환 두 번 사용 하는 이유는 이름을 소문자로 변환하여 데이터베이스에서 대소문자를
+        구별하지 않고 검색을 가능하게 하기 위해서
+    -->
     <select id="partialTextSearch" parameterType="com.example.mybatisStore.store.entity.Store">
         SELECT *
         FROM store
@@ -90,8 +94,23 @@ resultMap 재사용 가능, 복잡한 매핑 및 관계 정의
             average_score = (total_score + #{rating}) / (count_user + 1)
         WHERE product_id = #{productId}
         ]]>
-</update>
+    </update>
 
+    <!-- 평점 높은 순으로 상품 확인하기 -->
+    <select id="averageHigh" parameterType="com.example.mybatisStore.store.entity.Store">
+        SELECT *
+        FROM store
+        WHERE category_enum = #{categoryEnum}
+        ORDER BY average_score DESC
+    </select>
+
+    <!-- 평점 낮은 순으로 상품 확인하기 -->
+    <select id="averageLow" parameterType="com.example.mybatisStore.store.entity.Store">
+        SELECT *
+        FROM store
+        WHERE category_enum = #{categoryEnum}
+        ORDER BY average_score ASC
+    </select>
 
 </mapper>
 
